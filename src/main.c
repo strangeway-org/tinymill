@@ -18,15 +18,15 @@ SExpression *getAST(const char *expr) {
     YY_BUFFER_STATE state;
 
     if (yylex_init(&scanner)) {
-	// couldn't initialize
-	return NULL;
+        // couldn't initialize
+        return NULL;
     }
 
     state = yy_scan_string(expr, scanner);
 
     if (yyparse(&expression, scanner)) {
-	// error parsing
-	return NULL;
+        // error parsing
+        return NULL;
     }
 
     yy_delete_buffer(state, scanner);
@@ -40,23 +40,23 @@ int evaluate(SExpression *e) {
     char str[1024] = {0};
     int ret = 0;
     switch (e->type) {
-	case eVALUE:
-	    ret = e->value;
-	    break;
-	case eMULTIPLY:
-	    ret = evaluate(e->left) * evaluate(e->right);
-	    break;
-	case ePLUS:
-	    ret = evaluate(e->left) + evaluate(e->right);
-	    break;
-	case ePARENTHESES:
-	    ret = evaluate(e->center);
-	    break;
-	default:
-	    // shouldn't be here
-	    return 0;
+        case eVALUE:
+            ret = e->value;
+            break;
+        case eMULTIPLY:
+            ret = evaluate(e->left) * evaluate(e->right);
+            break;
+        case ePLUS:
+            ret = evaluate(e->left) + evaluate(e->right);
+            break;
+        case ePARENTHESES:
+            ret = evaluate(e->center);
+            break;
+        default:
+            // shouldn't be here
+            return 0;
     }
-    memcpy(str, test+e->from, e->to-e->from);
+    memcpy(str, test + e->from, (size_t) e->to - e->from);
     printf("[%s] = %d\n", str, ret);
     return ret;
 }

@@ -25,9 +25,6 @@ typedef void* yyscan_t;
  
 }
  
-%output  "Parser.c"
-%defines "Parser.h"
- 
 %define api.pure
 %lex-param   { yyscan_t scanner }
 %parse-param { SExpression **expression }

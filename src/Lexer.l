@@ -4,7 +4,7 @@
  * Lexer.l file
  * To generate the lexical analyzer run: "flex Lexer.l"
  */
- 
+
 #include "Expression.h"
 #include "Parser.h"
 
@@ -20,12 +20,13 @@ int colnum = 0;
 %}
 %option yylineno
 %option bison-locations
-%option outfile="Lexer.c" header-file="Lexer.h"
 %option warn nodefault
  
 %option reentrant noyywrap never-interactive nounistd
 %option bison-bridge
- 
+
+KEYWORD     "int"
+IDENTIFIER  [a-zA-Z][a-zA-Z0-9]*
 LPAREN      "("
 RPAREN      ")"
 PLUS        "+"
